@@ -587,11 +587,15 @@ function showFilmDetails(filmName) {
     const entries = oscarData.filter(d => d.Film === filmName);
     const wins = entries.filter(e => e.Winner === true || e.Winner === "True");
     
+    // Get the year from the first entry
+    const filmYear = entries[0]?.Year || 'Unknown Year';
+    
     const modal = document.getElementById('detail-modal');
     const modalBody = document.getElementById('modal-body');
     
     modalBody.innerHTML = `
         <h2>${filmName}</h2>
+        <p class="modal-subtitle">Year: ${filmYear}</p>
         <div class="modal-stats">
             <span>${entries.length} Nominations</span>
             <span class="gold-text">${wins.length} Wins</span>
@@ -620,30 +624,38 @@ function showCategoryDetails(category) {
     const modal = document.getElementById('detail-modal');
     const modalBody = document.getElementById('modal-body');
     
-    // Group by year
-    const byYear = {};
+    // Group by ceremony year (the actual year of the ceremony, not the film year)
+    const byCeremonyYear = {};
     entries.forEach(e => {
-        const year = e.Year || 'Unknown';
-        if (!byYear[year]) byYear[year] = [];
-        byYear[year].push(e);
+        // Calculate ceremony year: Ceremony 1 = 1929, Ceremony 2 = 1930, etc.
+        const ceremonyYear = e.Ceremony ? 1928 + e.Ceremony : e.Year;
+        const displayYear = ceremonyYear || 'Unknown';
+        
+        if (!byCeremonyYear[displayYear]) byCeremonyYear[displayYear] = [];
+        byCeremonyYear[displayYear].push({
+            ...e,
+            ceremonyYear: displayYear,
+            filmYear: e.Year // Keep the original film year for reference
+        });
     });
     
-    // Sort years and show all results
-    const sortedYears = Object.entries(byYear)
-        .sort((a, b) => b[0].localeCompare(a[0]));
+    // Sort years in descending order
+    const sortedYears = Object.entries(byCeremonyYear)
+        .sort((a, b) => b[0] - a[0]);
     
     modalBody.innerHTML = `
         <h2>${category} Winners</h2>
-        <p class="modal-subtitle">Total: ${entries.length} winners across ${sortedYears.length} years</p>
+        <p class="modal-subtitle">Total: ${entries.length} winners across ${sortedYears.length} ceremonies</p>
         <div class="modal-categories" style="max-height: 60vh; overflow-y: auto;">
-            ${sortedYears.map(([year, winners]) => `
+            ${sortedYears.map(([ceremonyYear, winners]) => `
                 <div class="year-group">
-                    <h3>${year}</h3>
+                    <h3>${ceremonyYear} Ceremony</h3>
                     ${winners.map(w => `
                         <div class="modal-entry">
                             <strong>${w.Name || w.Film}</strong>
                             ${w.Film && w.Name ? ` - ${w.Film}` : ''}
                             ${w.Category ? ` (${w.Category})` : ''}
+                            ${w.filmYear && w.filmYear !== ceremonyYear ? ` <span style="color: var(--text-secondary); font-size: 0.9em;">[${w.filmYear} film]</span>` : ''}
                         </div>
                     `).join('')}
                 </div>
