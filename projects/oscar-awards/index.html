@@ -1,1 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscar Awards Explorer</title>
+    <link rel="stylesheet" href="styles.css">    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    
+    <!-- PapaParse CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script>
+      // If the PapaParse CDN fails, load the local version as a fallback
+      if (typeof Papa === "undefined") {
+        var script = document.createElement("script");
+        script.src = "libs/papaparse.min.js";
+        document.head.appendChild(script);
+      }
+    </script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading" class="loading-screen">
+        <div class="oscar-statue">🏆</div>
+        <p>Loading Oscar History...</p>
+    </div>
 
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="title">
+                <span class="gold-text">Oscar</span> Awards Explorer
+                <span class="subtitle">Discover 97 Years of Cinema Excellence</span>
+            </h1>
+        </div>
+    </header>
+
+    <!-- Search Section with Autocomplete -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-wrapper">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search movies, actors, directors..." class="search-input" autocomplete="off">
+                    <div class="search-icon">🔍</div>
+                </div>
+                <div id="search-suggestions" class="search-suggestions"></div>
+            </div>
+            
+            <!-- Search Results (Hidden by default) -->
+            <div id="search-results" class="search-results hidden">
+                <h3 class="search-results-title">Search Results</h3>
+                <div id="results-container" class="results-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-row">
+                <div class="stat-item">
+                    <span class="stat-number" id="total-ceremonies">0</span>
+                    <span class="stat-label">Ceremonies</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="total-winners">0</span>
+                    <span class="stat-label">Winners</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="total-nominations">0</span>
+                    <span class="stat-label">Nominations</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="most-oscars">0</span>
+                    <span class="stat-label">Most Oscars (Single Film)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Interactive Timeline -->
+            <section class="timeline-section">
+                <h2 class="section-title">Academy Awards Timeline</h2>
+                <div class="timeline-controls">
+                    <button class="decade-btn active" data-decade="all">All Years</button>
+                    <button class="decade-btn" data-decade="1920">1920s</button>
+                    <button class="decade-btn" data-decade="1930">1930s</button>
+                    <button class="decade-btn" data-decade="1940">1940s</button>
+                    <button class="decade-btn" data-decade="1950">1950s</button>
+                    <button class="decade-btn" data-decade="1960">1960s</button>
+                    <button class="decade-btn" data-decade="1970">1970s</button>
+                    <button class="decade-btn" data-decade="1980">1980s</button>
+                    <button class="decade-btn" data-decade="1990">1990s</button>
+                    <button class="decade-btn" data-decade="2000">2000s</button>
+                    <button class="decade-btn" data-decade="2010">2010s</button>
+                    <button class="decade-btn" data-decade="2020">2020s</button>
+                </div>
+                <div class="year-selector">
+                    <input type="range" id="year-slider" min="1" max="97" value="97" class="year-slider">
+                    <div class="year-info">
+                        <span class="current-year" id="current-year">2024</span>
+                        <span class="ceremony-number">Ceremony #<span id="ceremony-number">97</span></span>
+                    </div>
+                </div>
+                <div id="timeline-content" class="timeline-content">
+                    <!-- Major winners will be displayed here -->
+                </div>
+            </section>
+
+            <!-- Top Nominated Films -->
+            <section class="top-films-section">
+                <h2 class="section-title">Most Nominated Films of All Time</h2>
+                <div class="chart-container-large">
+                    <canvas id="topFilmsChart"></canvas>
+                </div>
+                <div id="film-details" class="film-details"></div>
+            </section>
+
+            <!-- Most Wins Films -->
+            <section class="top-films-section">
+                <h2 class="section-title">Most Oscar Wins of All Time</h2>
+                <div class="chart-container-large">
+                    <canvas id="mostWinsChart"></canvas>
+                </div>
+                <div id="wins-details" class="film-details"></div>
+            </section>
+
+            <!-- Category Analysis -->
+            <section class="category-section">
+                <h2 class="section-title">Winners by Category</h2>
+                <div class="category-grid" id="category-grid">
+                    <!-- Category cards will be generated here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Dataset Credits</h4>
+                    <p>Data provided by <a href="https://www.kaggle.com/datasets/unanimad/the-oscar-award" target="_blank" rel="noopener">Raphael Fontes on Kaggle</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Designed & Developed by</h4>
+                    <p>Francesco Saviano</p>
+                    <a href="https://www.upwork.com/freelancers/~01c0e17d02ad619940?mp_source=share" target="_blank" rel="noopener" class="hire-btn">
+                        Hire me on Upwork
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Oscar Awards Explorer | Celebrating Cinema Excellence</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Details -->
+    <div id="detail-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
