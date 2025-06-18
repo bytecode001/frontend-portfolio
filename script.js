@@ -5,7 +5,7 @@ const projects = [
         description: "Interactive data visualization dashboard showcasing Oscar Awards statistics with dynamic charts and filtering capabilities.",
         techStack: ["HTML5", "CSS3", "JavaScript", "Chart.js"],
         image: "img/placeholder.jpg",
-        link: "projects/oscar-dashboard/index.html",
+        link: "projects/oscar-awards/index.html",
         featured: false
     },
     {
