@@ -12,7 +12,7 @@ const projects = [
         title: "E-commerce Product Page",
         description: "Modern product showcase with image gallery, zoom functionality, customer reviews, and add-to-cart animations.",
         techStack: ["HTML5", "CSS3", "JavaScript", "GSAP"],
-        image: "img/placeholder.jpg",
+        image: "img/e-commerce-product.jpg",
         link: "projects/ecommerce-product/index.html",
         featured: false
     },
