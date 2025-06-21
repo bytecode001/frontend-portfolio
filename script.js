@@ -20,7 +20,7 @@ const projects = [
         title: "Weather App",
         description: "Real-time weather application with geolocation, 5-day forecast, animated weather icons, and city search functionality.",
         techStack: ["HTML5", "CSS3", "JavaScript", "Weather API"],
-        image: "img/placeholder.jpg",
+        image: "img/weather-app.jpg",
         link: "projects/weather-app/index.html",
         featured: false
     },
