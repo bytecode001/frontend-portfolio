@@ -1,1 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modern Weather App - Get real-time weather updates and 5-day forecasts for any city">
+    <meta name="author" content="Francesco Saviano">
+    <title>Weather App - Francesco Saviano Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Main Weather Card -->
+        <div class="weather-card">
+            <!-- Header with Search -->
+            <header class="card-header">
+                <div class="search-box">
+                    <div class="search-input-wrapper">
+                        <input 
+                            type="text" 
+                            id="cityInput" 
+                            class="search-input" 
+                            placeholder="Search for a city..."
+                            autocomplete="off"
+                        >
+                        <!-- Autocomplete Dropdown -->
+                        <div id="autocompleteDropdown" class="autocomplete-dropdown">
+                            <!-- Suggestions will be dynamically added here -->
+                        </div>
+                    </div>
+                    <button id="searchBtn" class="btn-search" type="button" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                    <button id="locationBtn" class="btn-location" type="button" aria-label="Use my location">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Temperature Unit Toggle -->
+                <button id="unitToggle" class="unit-toggle" type="button">
+                    <span class="unit-c active">°C</span>
+                    <span class="unit-divider">|</span>
+                    <span class="unit-f">°F</span>
+                </button>
+            </header>
 
+            <!-- Loading State -->
+            <div id="loadingState" class="loading-state">
+                <div class="loader"></div>
+                <p>Loading weather data...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="errorState" class="error-state">
+                <div class="error-icon">⚠️</div>
+                <p id="errorMessage" class="error-message"></p>
+            </div>
+
+            <!-- Weather Content -->
+            <main id="weatherContent" class="weather-content">
+                <!-- Current Weather -->
+                <section class="current-weather">
+                    <div class="weather-header">
+                        <h1 id="cityName" class="city-name">--</h1>
+                        <p id="currentDate" class="current-date">--</p>
+                    </div>
+
+                    <div class="weather-display">
+                        <div id="weatherIcon" class="weather-icon-wrapper">
+                            <!-- Dynamic weather icon will be inserted here -->
+                        </div>
+                        <div class="temperature-display">
+                            <span id="temperature" class="temperature">--</span>
+                            <span id="tempUnit" class="temp-unit">°C</span>
+                        </div>
+                    </div>
+
+                    <p id="weatherDescription" class="weather-description">--</p>
+
+                    <div class="weather-info">
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"></path>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <span class="info-label">Feels like</span>
+                                <span id="feelsLike" class="info-value">--°</span>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"></path>
+                                    <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"></path>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <span class="info-label">Humidity</span>
+                                <span id="humidity" class="info-value">--%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path>
+                                    <path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path>
+                                    <path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <span class="info-label">Wind Speed</span>
+                                <span id="windSpeed" class="info-value">-- km/h</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5-Day Forecast -->
+                <section class="forecast-section">
+                    <h2 class="forecast-title">5-Day Forecast</h2>
+                    <div id="forecastContainer" class="forecast-container">
+                        <!-- Forecast items will be dynamically generated -->
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p class="footer-credit">Designed & Developed by Francesco Saviano</p>
+            <a href="https://www.upwork.com/freelancers/~01c0e17d02ad619940" 
+               class="btn-hire" 
+               target="_blank" 
+               rel="noopener noreferrer">
+                Hire Me on Upwork
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+            </a>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
