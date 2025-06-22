@@ -28,7 +28,7 @@ const projects = [
         title: "Task Management Board",
         description: "Kanban-style task manager with drag-and-drop functionality, local storage persistence, and smooth animations.",
         techStack: ["HTML5", "CSS3", "JavaScript", "Drag & Drop API"],
-        image: "img/placeholder.jpg",
+        image: "img/task-management-board.jpg",
         link: "projects/task-board/index.html",
         featured: false
     },
