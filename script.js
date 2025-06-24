@@ -36,7 +36,7 @@ const projects = [
         title: "Interactive Portfolio Gallery",
         description: "Photography portfolio with category filtering, lightbox viewer, lazy loading, and masonry grid layout.",
         techStack: ["HTML5", "CSS3", "JavaScript", "Intersection Observer"],
-        image: "img/placeholder.jpg",
+        image: "img/portfolio-gallery.jpg",
         link: "projects/photo-gallery/index.html",
         featured: false
     },
