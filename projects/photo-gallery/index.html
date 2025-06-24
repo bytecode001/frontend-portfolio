@@ -1,1 +1,199 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Portfolio Gallery - Francesco Saviano</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header con filtri -->
+    <header class="header">
+        <div class="container">
+            <h1 class="header-title">Portfolio Gallery</h1>
+            <nav class="filter-nav">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="nature">Nature</button>
+                <button class="filter-btn" data-filter="portrait">Portrait</button>
+                <button class="filter-btn" data-filter="architecture">Architecture</button>
+                <button class="filter-btn" data-filter="street">Street</button>
+                <button class="filter-btn" data-filter="abstract">Abstract</button>
+            </nav>
+        </div>
+    </header>
 
+    <!-- Gallery Container -->
+    <main class="gallery-container">
+        <div class="masonry-grid">
+            <!-- Nature Photos -->
+            <div class="gallery-item" data-category="nature">
+                <img src="img/jisca-lucia-hToLAaMzQLk-unsplash.jpg" alt="Nature landscape" class="gallery-img lazy" loading="lazy">
+                <div class="overlay">
+                    <h3 class="overlay-title">Mountain Sunrise</h3>
+                    <p class="overlay-category">Nature</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="nature">
+                <img src="img/lukasz-szmigiel-jFCViYFYcus-unsplash.jpg" alt="Nature landscape" class="gallery-img lazy" loading="lazy">
+                <div class="overlay">
+                    <h3 class="overlay-title">Forest Path</h3>
+                    <p class="overlay-category">Nature</p>
+                </div>
+            </div>
+
+            <!-- Portrait Photos -->
+            <div class="gallery-item" data-category="portrait">
+                <img src="img/cord-allman-Vpn1B-vE-5U-unsplash.jpg" alt="Portrait" class="gallery-img lazy" loading="lazy">
+                <div class="overlay">
+                    <h3 class="overlay-title">Candid Moment</h3>
+                    <p class="overlay-category">Portrait</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="portrait">
+                <img src="img/vlad-rudkov-2sEiX08LDMs-unsplash.jpg" alt="Portrait" class="gallery-img lazy" loading="lazy">
+                <div class="overlay">
+                    <h3 class="overlay-title">Studio Portrait</h3>
+                    <p class="overlay-category">Portrait</p>
+                </div>
+            </div>
+
+            <!-- Architecture Photos -->
+            <div class="gallery-item" data-category="architecture">
+                <img src="img/parrish-freeman-KhCpLix6F4g-unsplash.jpg" alt="Architecture" class="gallery-img lazy" loading="lazy">
+                <div class="overlay">
+                    <h3 class="overlay-title">Modern Lines</h3>
+                    <p class="overlay-category">Architecture</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="architecture">
+                <img src="img/jackson-jost-RMynbTjDu_g-unsplash.jpg" alt="Architecture" class="gallery-img lazy" loading="lazy">
+                <div class="overlay">
+                    <h3 class="overlay-title">Urban Geometry</h3>
+                    <p class="overlay-category">Architecture</p>
+                </div>
+            </div>
+
+            <!-- Street Photos -->
+            <div class="gallery-item" data-category="street">
+                <img src="img/yoghi-kurniawan-3J645atsdgQ-unsplash.jpg" alt="Street photography" class="gallery-img lazy" loading="lazy">
+                <div class="overlay">
+                    <h3 class="overlay-title">City Life</h3>
+                    <p class="overlay-category">Street</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="street">
+                <img src="img/netnutter-r1AKeu6mTts-unsplash.jpg" alt="Street photography" class="gallery-img lazy" loading="lazy">
+                <div class="overlay">
+                    <h3 class="overlay-title">Night Lights</h3>
+                    <p class="overlay-category">Street</p>
+                </div>
+            </div>
+
+            <!-- Abstract Photos -->
+            <div class="gallery-item" data-category="abstract">
+                <img src="img/imkara-visual-P10v1JlDpcg-unsplash.jpg" alt="Abstract art" class="gallery-img lazy" loading="lazy">
+                <div class="overlay">
+                    <h3 class="overlay-title">Color Flow</h3>
+                    <p class="overlay-category">Abstract</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="abstract">
+                <img src="img/jj-ying-7JX0-bfiuxQ-unsplash.jpg" alt="Abstract art" class="gallery-img lazy" loading="lazy">
+                <div class="overlay">
+                    <h3 class="overlay-title">Texture Study</h3>
+                    <p class="overlay-category">Abstract</p>
+                </div>
+            </div>
+
+            <!-- Additional mixed content -->
+            <div class="gallery-item" data-category="nature">
+                <img src="img/bradley-hook-n9-uE5LjaoQ-unsplash.jpg" alt="Nature landscape" class="gallery-img lazy" loading="lazy">
+                <div class="overlay">
+                    <h3 class="overlay-title">Ocean Waves</h3>
+                    <p class="overlay-category">Nature</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="portrait">
+                <img src="img/andrey-zvyagintsev-T8IkNlQojCQ-unsplash.jpg" alt="Portrait" class="gallery-img lazy" loading="lazy">
+                <div class="overlay">
+                    <h3 class="overlay-title">Natural Light</h3>
+                    <p class="overlay-category">Portrait</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+        <button class="lightbox-prev" aria-label="Previous image">&#8249;</button>
+        <button class="lightbox-next" aria-label="Next image">&#8250;</button>
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-img">
+            <div class="lightbox-info">
+                <h3 class="lightbox-title"></h3>
+                <p class="lightbox-category"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Credits Modal -->
+    <div class="credits-modal" id="creditsModal">
+        <div class="credits-content">
+            <button class="credits-close" aria-label="Close credits">&times;</button>
+            <h2 class="credits-title">Image Credits</h2>
+            <div class="credits-list">
+                <p>Photo by <a href="https://unsplash.com/@wanderlandjournal" target="_blank" rel="noopener">Jisca Lucia</a> on <a href="https://unsplash.com/photos/a-mountain-range-with-snow-capped-mountains-in-the-background-hToLAaMzQLk" target="_blank" rel="noopener">Unsplash</a></p>
+                
+                <p>Photo by <a href="https://unsplash.com/@szmigieldesign" target="_blank" rel="noopener">Lukasz Szmigiel</a> on <a href="https://unsplash.com/photos/forest-trees-jFCViYFYcus" target="_blank" rel="noopener">Unsplash</a></p>
+                
+                <p>Photo by <a href="https://unsplash.com/@cordallman" target="_blank" rel="noopener">Cord Allman</a> on <a href="https://unsplash.com/photos/a-man-standing-in-front-of-a-tall-building-Vpn1B-vE-5U" target="_blank" rel="noopener">Unsplash</a></p>
+                
+                <p>Photo by <a href="https://unsplash.com/@jqb" target="_blank" rel="noopener">Vlad Rudkov</a> on <a href="https://unsplash.com/photos/a-woman-with-red-hair-and-black-shoes-2sEiX08LDMs" target="_blank" rel="noopener">Unsplash</a></p>
+                
+                <p>Photo by <a href="https://unsplash.com/@parrish" target="_blank" rel="noopener">Parrish Freeman</a> on <a href="https://unsplash.com/photos/a-close-up-of-a-building-KhCpLix6F4g" target="_blank" rel="noopener">Unsplash</a></p>
+                
+                <p>Photo by <a href="https://unsplash.com/@jacksonjost" target="_blank" rel="noopener">Jackson Jost</a> on <a href="https://unsplash.com/photos/low-angle-photography-of-building-RMynbTjDu_g" target="_blank" rel="noopener">Unsplash</a></p>
+                
+                <p>Photo by <a href="https://unsplash.com/@netnutter" target="_blank" rel="noopener">NetNutter</a> on <a href="https://unsplash.com/photos/a-group-of-lights-r1AKeu6mTts" target="_blank" rel="noopener">Unsplash</a></p>
+                
+                <p>Photo by <a href="https://unsplash.com/@imkaravisual" target="_blank" rel="noopener">Imkara Visual</a> on <a href="https://unsplash.com/photos/a-close-up-of-a-cell-phone-with-a-blurry-background-P10v1JlDpcg" target="_blank" rel="noopener">Unsplash</a></p>
+                
+                <p>Photo by <a href="https://unsplash.com/@jjying" target="_blank" rel="noopener">JJ Ying</a> on <a href="https://unsplash.com/photos/white-and-gray-optical-illusion-7JX0-bfiuxQ" target="_blank" rel="noopener">Unsplash</a></p>
+                
+                <p>Photo by <a href="https://unsplash.com/@surfd" target="_blank" rel="noopener">Bradley Hook</a> on <a href="https://unsplash.com/photos/ocean-waves-crashing-on-shore-during-daytime-n9-uE5LjaoQ" target="_blank" rel="noopener">Unsplash</a></p>
+                
+                <p>Photo by <a href="https://unsplash.com/@zvandrei" target="_blank" rel="noopener">Andrey Zvyagintsev</a> on <a href="https://unsplash.com/photos/grayscale-photo-of-woman-T8IkNlQojCQ" target="_blank" rel="noopener">Unsplash</a></p>
+                
+                <p>Photo by <a href="https://unsplash.com/@ohgikk" target="_blank" rel="noopener">Yoghi Kurniawan</a> on <a href="https://unsplash.com/photos/man-near-box-3J645atsdgQ" target="_blank" rel="noopener">Unsplash</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">Designed & Developed by Francesco Saviano</p>
+            <a href="https://www.upwork.com/freelancers/~01c0e17d02ad619940?mp_source=share" class="cta-button" target="_blank" rel="noopener">
+                <span class="cta-text">Hire Me on Upwork</span>
+                <svg class="cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+            </a>
+            <button class="credits-link" id="creditsLink">Image Credits</button>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
