@@ -168,6 +168,11 @@ h4 { font-size: 1.25rem; }
     height: 20px;
 }
 
+.feature-icon i {
+    font-size: 24px;
+}
+
+
 /* Navigation */
 .navbar {
     position: fixed;
